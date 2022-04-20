@@ -18,6 +18,7 @@
 #include <memory>
 #include <string>
 #include <vector>
+#include <iostream>
 
 #include "rclcpp/rclcpp.hpp"
 #include "behaviortree_cpp_v3/utils/shared_library.h"
@@ -50,7 +51,12 @@ BehaviorTreeEngine::run(
       return BtStatus::CANCELED;
     }
 
-    result = tree->tickRoot();
+    try {
+      result = tree->tickRoot();
+    } catch (const std::exception& ex) {
+      std::cout << "tree->tickRoot() raised an exception, "  << ex.what() << std::endl;
+      return BtStatus::FAILED;
+    }
 
     onLoop();
 
