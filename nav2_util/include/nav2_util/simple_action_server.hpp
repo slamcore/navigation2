@@ -39,7 +39,7 @@ public:
     const std::string & action_name,
     ExecuteCallback execute_callback,
     bool autostart = true,
-    std::chrono::milliseconds server_timeout = std::chrono::milliseconds(500))
+    std::chrono::milliseconds server_timeout = std::chrono::milliseconds(2000))
   : SimpleActionServer(
       node->get_node_base_interface(),
       node->get_node_clock_interface(),
